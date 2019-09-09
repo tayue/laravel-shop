@@ -119,7 +119,7 @@ class PaymentController extends Controller
 
     protected function afterPaid(Order $order)
     {
-        event(new OrderPaid($order));
+        event(new OrderPaid($order)); //触发事件
     }
 
     public function wechatRefundNotify(Request $request)

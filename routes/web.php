@@ -11,9 +11,41 @@
 |
 */
 
+use App\Events\OrderShipped; //事件任务队列
+use App\Jobs\SendPostEmail; //工作任务队列
+use Illuminate\Support\Facades\Artisan; //命令行工作队列
+use Illuminate\Support\Facades\Redis;
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
+
+//Route::get('/subscribe', function () {
+//    Redis::subscribe(['test-channel'], function ($message) {
+//        echo $message;
+//    });
+//});
+
+Route::get('/publish', function () {
+    Redis::publish('test-channel', json_encode(['foo' => 'bar']));
+});
+
+
+    Route::get('/foo', function () { //测试队列应用
+    $userId=rand(1111,9999);
+
+    Artisan::queue('inspire', [   //命令行工作队列
+        'user' =>$userId, '--queue' => [1,2,3]
+    ]);
+      event('eventtest',[1,2]); //事件分发，事件任务队列
+    $name="test queue".rand(1111,9999);
+
+      dispatch(new SendPostEmail($name)); //工作任务队列
+
+      event(new OrderShipped()); //事件分发，事件任务队列
+
+    //
+});
+
 
 Auth::routes(['verify' => true]);
 

@@ -7,7 +7,7 @@ use App\Notifications\OrderPaidNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-// implements ShouldQueue 代表异步监听器
+// implements ShouldQueue 代表异步监听器(使用队列来处理)
 class SendOrderPaidMail implements ShouldQueue
 {
     public function handle(OrderPaid $event)

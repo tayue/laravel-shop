@@ -6,7 +6,8 @@ use App\Exceptions\InvalidRequestException;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use App\Jobs\SendPostEmail;
+use Illuminate\Support\Facades\Artisan;
 class ProductsController extends Controller
 {
     public function index(Request $request)

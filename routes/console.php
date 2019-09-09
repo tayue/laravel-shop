@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Redis;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,18 @@ use Illuminate\Foundation\Inspiring;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
+Artisan::command("inspire 
+               {user : The ID of the user}
+               {--queue=* : Whether the job should be queued}", function () { //闭包命令
+    $arguments = $this->arguments();
+    $userId = $this->argument('user');
+    $options = $this->options();
+    print_r($arguments);
+    print_r($options);
+
+//    $name = $this->ask('What is your name?');
+//    $password = $this->secret('What is the password?');
+//    echo "$name\r\n";
+//    echo "$password\r\n";
+    $this->info(Inspiring::quote());
 })->describe('Display an inspiring quote');

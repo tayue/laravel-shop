@@ -40,6 +40,27 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+
+        /**
+        'mysql' => [
+            'read' => [
+                'host' => ['192.168.1.1'],
+            ],
+            'write' => [
+                'host' => ['196.168.1.2'],
+            ],
+            'sticky'    => true,
+            'driver'    => 'mysql',
+            'database'  => 'database',
+            'username'  => 'root',
+            'password'  => '',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
+         *
+         */
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
